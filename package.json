@@ -1,0 +1,37 @@
+{
+  "name": "stampper",
+  "version": "1.0.0",
+  "description": "Typescript decorators-based JSON validator",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "npx jest --config jestconfig.json",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serrodale/stampper.git"
+  },
+  "keywords": [
+    "validator",
+    "JSON",
+    "typescript"
+  ],
+  "author": "Sergio Rodríguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/serrodale/stampper/issues"
+  },
+  "homepage": "https://github.com/serrodale/stampper#readme",
+  "devDependencies": {
+    "@types/jest": "^25.1.3",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
