@@ -7,7 +7,8 @@
   "scripts": {
     "build": "npx tsc",
     "test": "npx jest --config jestconfig.json",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "run:example:cities": "npx ts-node src/examples/cities.example.ts"
   },
   "repository": {
     "type": "git",
