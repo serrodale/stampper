@@ -1,4 +1,4 @@
-import { StringLongerThanAllowedJSONError } from "../../decorators/string/string.errors";
+import { StringJSONError } from "../../decorators/string/string.errors";
 
 export enum JSONErrorType {
   InvalidType,
@@ -8,9 +8,9 @@ export enum JSONErrorType {
   StringIsNotInTheAllowedValues,
 }
 
-type JSONError =
+export type JSONError =
+  | StringJSONError
   | InvalidTypeJSONError
-  | StringLongerThanAllowedJSONError
   | MissingRequiredPropertyJSONError;
 
 export class JSONErrorBase {

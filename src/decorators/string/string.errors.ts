@@ -1,22 +1,9 @@
 import { JSONErrorType, JSONErrorBase } from "../../commons/types/error.types";
 
-export class StringShorterThanAllowedJSONError extends JSONErrorBase {
-  constructor(
-    name: string,
-    value: any,
-    path: string[],
-    length: number,
-    minLengthAllowed: number,
-  ) {
-    super(
-      name,
-      value,
-      JSONErrorType.StringShorterThanAllowed,
-      path,
-      `String is shorter than allowed (allowed=${minLengthAllowed}, received=${length})`
-    );
-  }
-}
+export type StringJSONError = 
+  | StringLongerThanAllowedJSONError
+  | StringShorterThanAllowedJSONError
+  | StringIsNotInTheAllowedValuesJSONError;
 
 export class StringLongerThanAllowedJSONError extends JSONErrorBase {
   constructor(
@@ -32,6 +19,24 @@ export class StringLongerThanAllowedJSONError extends JSONErrorBase {
       JSONErrorType.StringLongerThanAllowed,
       path,
       `String is longer than allowed (allowed=${maxLengthAllowed}, received=${length})`
+    );
+  }
+}
+
+export class StringShorterThanAllowedJSONError extends JSONErrorBase {
+  constructor(
+    name: string,
+    value: any,
+    path: string[],
+    length: number,
+    minLengthAllowed: number,
+  ) {
+    super(
+      name,
+      value,
+      JSONErrorType.StringShorterThanAllowed,
+      path,
+      `String is shorter than allowed (allowed=${minLengthAllowed}, received=${length})`
     );
   }
 }
