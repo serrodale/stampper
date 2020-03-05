@@ -10,7 +10,6 @@ import {
 import {
   propertyIsArray,
   getPropertiesInfo,
-  propertyIsOptional,
 } from './commons/utils/reflect.utils';
 
 class JSONValidator {
@@ -24,8 +23,8 @@ class JSONValidator {
     propertiesInfos.forEach((propertyInfo: PropertyInfo) => {
       const name: string = propertyInfo.name;
       const value: string = json[name];
-      const isOptional: boolean = propertyIsOptional(instance, name);
       const isArray: boolean = propertyIsArray(instance, name);
+      const isOptional: boolean = !!propertyInfo.params?.optional;
 
       this.validateProperty(value, propertyInfo, isOptional, isArray);
     });
@@ -38,6 +37,10 @@ class JSONValidator {
     isArray: boolean,
   ): void {
     this.propertyPath.push(propertyInfo.name);
+
+    if (isOptional && isNil(value)) {
+      return;
+    }
 
     if (!isOptional) {
       this.validateRequiredProperty(value, propertyInfo);

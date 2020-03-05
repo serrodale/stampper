@@ -1,7 +1,6 @@
 import { List } from "../decorators/list/list.decorator";
 import { Class } from "../decorators/class/class.decorator";
 import { String } from "../decorators/string/string.decorator";
-import { Optional } from "../decorators/optional/optional.decorator";
 
 import { validateJSON } from "..";
 
@@ -25,9 +24,11 @@ class Country {
 	@List({ allowedValues: ['Pepe', 'Juan'], canBeRepeated: true, separator: ',' })
   name: string;
 
-  @Optional()
 	@Class({ class: Country })
   countriesVisited: Country[];
+
+  @String({ optional: true })
+  optionalProperty: string;
 }
 
 try {

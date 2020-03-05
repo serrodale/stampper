@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
+import { propertiesWithConfigKey } from '../constants/symbols.constants';
 import { PropertyType, PropertyInfo } from '../types/property.types';
-import { propertiesWithConfigKey, optionalPropertiesKey } from '../constants/symbols.constants';
 
 export function getPropertyDecorator(type: PropertyType, params: any): PropertyDecorator {
   return (target: object, name: string) => {
@@ -15,14 +15,6 @@ export function getPropertyDecorator(type: PropertyType, params: any): PropertyD
 
 export function getPropertiesInfo(target: any): PropertyInfo[] {
   return Reflect.getMetadata(propertiesWithConfigKey, target) ?? [];
-}
-
-export function getOptionalPropertiesNames(target: any): string[] {
-  return Reflect.getMetadata(propertiesWithConfigKey, target) ?? [];
-}
-
-export function propertyIsOptional(target: any, name: string): boolean {
-  return getOptionalPropertiesNames(target).includes(name);
 }
 
 export function propertyIsArray(target: any, name: string): boolean {
