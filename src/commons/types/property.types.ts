@@ -11,7 +11,17 @@ export enum PropertyType {
 
 export type PropertyDecorator = (target: object, propertyKey: string) => void;
 
-export type PropertyInfo =
+export interface PropertyInfo {
+  name: string;
+  type: PropertyType;
+  params: any;
+}
+
+export interface PropertyInfoWithValue extends PropertyInfo {
+  value: any;
+}
+
+export type PropertyInfo2 =
   | NumberPropertyInfo
   | StringPropertyInfo
   | OtherClassPropertyInfo;

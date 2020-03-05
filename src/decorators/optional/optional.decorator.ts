@@ -1,11 +1,12 @@
-import { optionalPropertiesKey } from "../../commons/constants/symbols.constants";
+import { optionalPropertiesKey } from '../../commons/constants/symbols.constants';
+import { getOptionalPropertiesNames } from '../../commons/utils/reflect.utils';
 
 export function Optional() {
-  return (target: object, propertyKey: string) => {
+  return (target: object, name: string) => {
     Reflect.defineMetadata(
       optionalPropertiesKey,
-      (Reflect.getMetadata(optionalPropertiesKey, target) ?? []).concat(propertyKey),
-      target
+      [...getOptionalPropertiesNames(target), name],
+      target,
     );
-  }
+  };
 }

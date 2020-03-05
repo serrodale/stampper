@@ -2,6 +2,7 @@ import { OtherClass } from "../decorators/other-class/other-class.decorator";
 import { List } from "../decorators/list/list.decorator";
 import { validateJSON } from "..";
 import { String } from "../decorators/string/string.decorator";
+import { Optional } from "../decorators/optional/optional.decorator";
 
 /**
  * APP
@@ -23,6 +24,7 @@ class Country {
 	@List({ allowedValues: ['Pepe', 'Juan'], canBeRepeated: true, separator: ',' })
   name: string;
 
+  @Optional()
 	@OtherClass({ class: Country })
   countriesVisited: Country[];
 }
