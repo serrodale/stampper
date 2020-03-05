@@ -1,6 +1,6 @@
 import { StringParams } from "../../decorators/string/string.params";
 import { NumberParams } from "../../decorators/number/number.params";
-import { OtherClassParams } from "../../decorators/other-class/other-class.params";
+import { ClassParams } from "../../decorators/class/class.params";
 
 export enum PropertyType {
   List,
@@ -15,7 +15,7 @@ export type PropertyParams = Record<string, any>;
 export type PropertyInfo =
   | StringPropertyInfo
   | NumberPropertyInfo
-  | OtherClassPropertyInfo;
+  | ClassPropertyInfo;
 
 export interface PropertyInfoCommons {
   name: string;
@@ -33,7 +33,7 @@ export interface NumberPropertyInfo extends PropertyInfoCommons {
   params: NumberParams;
 }
 
-export interface OtherClassPropertyInfo extends PropertyInfoCommons {
+export interface ClassPropertyInfo extends PropertyInfoCommons {
   type: PropertyType.OtherClass;
-  params: OtherClassParams;
+  params: ClassParams;
 }

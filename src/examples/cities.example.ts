@@ -1,8 +1,9 @@
-import { OtherClass } from "../decorators/other-class/other-class.decorator";
 import { List } from "../decorators/list/list.decorator";
-import { validateJSON } from "..";
+import { Class } from "../decorators/class/class.decorator";
 import { String } from "../decorators/string/string.decorator";
 import { Optional } from "../decorators/optional/optional.decorator";
+
+import { validateJSON } from "..";
 
 /**
  * APP
@@ -16,7 +17,7 @@ class Country {
 	@String()
   name: string;
 
-	@OtherClass({ class: City })
+	@Class({ class: City })
   cities: City[];
 }
 
@@ -25,13 +26,13 @@ class Country {
   name: string;
 
   @Optional()
-	@OtherClass({ class: Country })
+	@Class({ class: Country })
   countriesVisited: Country[];
 }
 
 try {
   validateJSON(Person, {
-    name: 'Juan',
+    name: 'Juann',
     countriesVisited: [
       {
         name: 'Spain',
