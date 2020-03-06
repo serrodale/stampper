@@ -1,5 +1,7 @@
-import { isNil } from 'lodash';
 import { Validator } from '../../commons/types/validator.type';
+import { StringParams } from './string.params';
+import { isNil, isString } from 'lodash';
+import { InvalidTypeJSONError } from '../../commons/types/error.types';
 
 import {
   StringLongerThanAllowedJSONError,
@@ -15,20 +17,27 @@ export class StringValidator extends Validator {
 
   constructor(
     value: any,
-    propertyInfo: any,
+    params: StringParams,
     propertyPath: string[],
   ) {
     super(value, propertyPath);
 
-    this.minLength = propertyInfo?.minLength;
-    this.maxLength = propertyInfo?.maxLength;
-    this.allowedValues = propertyInfo?.allowedValues;
+    this.minLength = params?.minLength;
+    this.maxLength = params?.maxLength;
+    this.allowedValues = params?.allowedValues;
   }
 
   validate(): void {
+    this.validateIsString();
     this.validateIsLongerThanMinLengthIfAny();
     this.validateIsShorterThanMaxLengthIfAny();
     this.validateIsInTheAllowedValuesListIfAny();
+  }
+
+  private validateIsString(): void {
+    if (!isString(this.value)) {
+      throw new InvalidTypeJSONError(this.name, this.value, this.propertyPath);
+    }
   }
 
   private validateIsLongerThanMinLengthIfAny(): void {

@@ -20,8 +20,8 @@ class Country {
   cities: City[];
 }
 
- class Person {
-	@List({ allowedValues: ['Pepe', 'Juan'], allowRepeatedValues: true, separator: ',' })
+class Person {
+	@List({ allowedValues: ['Pepe', 'Juan'], separator: ',' })
   name: string;
 
 	@Class({ class: Country })
@@ -33,7 +33,7 @@ class Country {
 
 try {
   validateJSON(Person, {
-    name: 'Juan',
+    name: 'Juan,Juan',
     countriesVisited: [
       {
         name: 'Spain',

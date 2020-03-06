@@ -1,5 +1,6 @@
 import { isNil } from 'lodash';
 import { Validator } from "../../commons/types/validator.type";
+import { ListParams } from './list.params';
 
 import {
   ListValueIsRepeated,
@@ -15,15 +16,15 @@ export class ListValidator extends Validator {
   
   constructor(
     value: any,
-    propertyInfo: any,
+    params: ListParams,
     propertyPath: string[],
   ) {
     super(value, propertyPath);
 
-    this.separator = propertyInfo?.separator;
+    this.separator = params?.separator;
     this.values = value.split(this.separator);
-    this.allowedValues = propertyInfo?.allowedValues;
-    this.allowRepeatedValues = !!propertyInfo?.allowRepeatedValues;
+    this.allowedValues = params?.allowedValues;
+    this.allowRepeatedValues = !!params?.allowRepeatedValues;
   }
 
   validate(): void {
