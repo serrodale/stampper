@@ -1,5 +1,6 @@
 import { List } from "../decorators/list/list.decorator";
 import { Class } from "../decorators/class/class.decorator";
+import { Number } from "../decorators/number/number.decorator";
 import { String } from "../decorators/string/string.decorator";
 
 import { validateJSON } from "..";
@@ -24,6 +25,9 @@ class Person {
 	@List({ allowedValues: ['Pepe', 'Juan'], separator: ',' })
   name: string;
 
+  @Number()
+  yearBorn: number;
+
 	@Class({ class: Country })
   countriesVisited: Country[];
 
@@ -33,7 +37,7 @@ class Person {
 
 try {
   validateJSON(Person, {
-    name: 'Juan,Juan',
+    name: 'Juan',
     countriesVisited: [
       {
         name: 'Spain',

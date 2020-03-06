@@ -1,6 +1,7 @@
 import { isNil } from 'lodash';
 import { ListValidator } from './decorators/list/list.validator';
 import { StringValidator } from './decorators/string/string.validator';
+import { NumberValidator } from './decorators/number/number.validator';
 import { PropertyType, PropertyInfo } from './commons/types/property.types';
 
 import {
@@ -85,6 +86,9 @@ class JSONValidator {
     switch (propertyInfo.type) {
       case PropertyType.String:
         new StringValidator(value, propertyInfo.params, this.propertyPath).validate()
+        break;
+      case PropertyType.Number:
+        new NumberValidator(value, propertyInfo.params, this.propertyPath).validate()
         break;
       case PropertyType.List:
         new ListValidator(value, propertyInfo.params, this.propertyPath).validate()
