@@ -1,6 +1,6 @@
 {
   "name": "stampper",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Typescript decorators-based JSON validator",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
