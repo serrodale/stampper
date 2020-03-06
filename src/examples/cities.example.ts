@@ -31,7 +31,7 @@ class Person {
 	@Class({ class: Country })
   countriesVisited: Country[];
 
-  @String({ optional: true })
+  @String({ isOptional: true })
   optionalProperty: string;
 }
 

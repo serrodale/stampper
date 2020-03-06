@@ -26,7 +26,7 @@ class JSONValidator {
       const name: string = propertyInfo.name;
       const value: string = json[name];
       const isArray: boolean = propertyIsArray(instance, name);
-      const isOptional: boolean = !!propertyInfo.params?.optional;
+      const isOptional: boolean = !!propertyInfo.params?.isOptional;
 
       this.validateProperty(value, propertyInfo, isOptional, isArray);
     });

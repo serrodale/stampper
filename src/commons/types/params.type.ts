@@ -1,3 +1,3 @@
 export interface Params {
-  optional?: boolean;
+  isOptional?: boolean;
 }
