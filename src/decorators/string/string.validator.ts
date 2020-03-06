@@ -1,5 +1,5 @@
-import { isNil, isString } from 'lodash';
-import { InvalidTypeJSONError } from '../../commons/types/error.types';
+import { isNil } from 'lodash';
+import { Validator } from '../../commons/types/validator.type';
 
 import {
   StringLongerThanAllowedJSONError,
@@ -7,77 +7,64 @@ import {
   StringIsNotInTheAllowedValuesJSONError,
 } from './string.errors';
 
-export class StringValidator {
+export class StringValidator extends Validator {
 
-  name: any;
-  value: any;
-  propertyInfo: any;
-  propertyPath: string[];
+  minLength: number;
+  maxLength: number;
+  allowedValues: string[];
 
   constructor(
     value: any,
     propertyInfo: any,
     propertyPath: string[],
   ) {
-    this.name = propertyPath.slice(-1);
-    this.value = value;
-    this.propertyInfo = propertyInfo;
-    this.propertyPath = propertyPath;
+    super(value, propertyPath);
+
+    this.minLength = propertyInfo?.minLength;
+    this.maxLength = propertyInfo?.maxLength;
+    this.allowedValues = propertyInfo?.allowedValues;
   }
 
   validate(): void {
-    this.validateIsString();
     this.validateIsLongerThanMinLengthIfAny();
     this.validateIsShorterThanMaxLengthIfAny();
     this.validateIsInTheAllowedValuesListIfAny();
   }
 
-  private validateIsString(): void {
-    if (!isString(this.value)) {
-      throw new InvalidTypeJSONError(this.name, this.value, this.propertyPath);
-    }
-  }
-
   private validateIsLongerThanMinLengthIfAny(): void {
     if (
-      !isNil(this.propertyInfo?.minLength) &&
-      this.value.length < this.propertyInfo.minLength
+      !isNil(this.minLength) &&
+      this.value.length < this.minLength
     ) {
       throw new StringShorterThanAllowedJSONError(
         this.name,
         this.value,
         this.propertyPath,
         this.value.length,
-        this.propertyInfo.minLength,
+        this.minLength,
       );
     }
   }
   
   private validateIsShorterThanMaxLengthIfAny(): void {
-    if (
-      !isNil(this.propertyInfo?.maxLength) &&
-      this.value.length < this.propertyInfo.maxLength
-    ) {
+    if (!isNil(this.maxLength) && this.value.length < this.maxLength) {
       throw new StringLongerThanAllowedJSONError(
         this.name,
         this.value,
         this.propertyPath,
         this.value.length,
-        this.propertyInfo.maxLength,
+        this.maxLength,
       );
     }
   }
   
   private validateIsInTheAllowedValuesListIfAny(): void {
-    if (
-      !isNil(this.propertyInfo?.allowedValues) &&
-      !this.propertyInfo.allowedValues.includes(this.value)
-    ) {
+    if (!isNil(this.allowedValues) && !this.allowedValues.includes(this.value)) {
       throw new StringIsNotInTheAllowedValuesJSONError(
         this.name,
         this.value,
         this.propertyPath,
-        this.propertyInfo.allowedValues,
+        this.allowedValues,
       );
     }
   }
