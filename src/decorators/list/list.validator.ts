@@ -44,7 +44,7 @@ export class ListValidator extends Validator {
 
   private valuesAreRepeatedAndTheyCant(): boolean {
     return (
-      !this.allowRepeatedValues &&
+      this.allowRepeatedValues &&
       this.values.some((value: string, index: number) =>
         this.values.slice(index).includes(value),
       )
