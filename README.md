@@ -5,8 +5,10 @@ TS decorators-based JSON validator.
 First, define the model.
 
 ```ts
+import { String, Number, List, Class } from 'stampper';
+
 class Person {
-  @String({ minLength: 3})
+  @String({ minLength: 3 })
   name: string;
 
   @Number({ optional: true })
@@ -36,6 +38,8 @@ class City {
 And, then, call ``validateJSON`` passing the model and the JSON value to be validated. 
 
 ```ts
+import { validateJSON } from 'stampper';
+
 validateJSON(Person, {
   name: 'Name',
   years: 50,
