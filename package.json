@@ -38,7 +38,7 @@
   ],
   "dependencies": {
     "reflect-metadata": "^0.1.13",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "typescript": "^3.8.3"
   }
 }
